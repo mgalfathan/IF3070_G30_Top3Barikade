@@ -2,8 +2,8 @@ from __future__ import annotations
 import json
 from pathlib import Path
 from typing import Any
-from .model import Placement, Problem, Ship, State, Vehicle
-from .objective import summarize
+from ..core.model import Placement, Problem, Ship, State, Vehicle
+from ..core.objective import summarize
 from .result import Result
 
 def load_json(path: str | Path) -> Any:
@@ -55,7 +55,7 @@ def state_to_dict(problem: Problem, state: State, include_summary: bool = True) 
 
 
 def state_from_dict(problem: Problem, data: dict) -> State:
-    """Kendaraan yang tidak tercantum dianggap berada di luar kapal."""
+    # kendaraan yang tidak ada di data dianggap di luar kapal
     by_id = {item["id"]: item for item in data["vehicles"]}
     placements = []
     for v in problem.vehicles:

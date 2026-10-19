@@ -8,7 +8,6 @@ ORIENTATIONS = (HORIZONTAL, VERTICAL)
 
 @dataclass(frozen=True)
 class Vehicle:
-    """Data kendaraan yang tidak pernah berubah selama pencarian."""
     id: str
     w: int
     l: int
@@ -21,7 +20,6 @@ class Vehicle:
         return self.w * self.l
 
     def dims(self, orientation: str) -> tuple[int, int]:
-        """Ukuran (dx, dy) kendaraan pada orientasi tertentu."""
         if orientation == HORIZONTAL:
             return self.w, self.l
         if orientation == VERTICAL:
@@ -29,7 +27,6 @@ class Vehicle:
         raise ValueError(f"Orientasi tidak dikenal: {orientation!r}")
 
     def fits(self, ship: Ship, orientation: str) -> bool:
-        """Apakah kendaraan pada orientasi ini bisa muat di geladak kosong."""
         dx, dy = self.dims(orientation)
         return dx <= ship.width and dy <= ship.length
 
@@ -47,7 +44,6 @@ class Ship:
 
 @dataclass(frozen=True)
 class Problem:
-    """Satu instance permasalahan: satu kapal + daftar kendaraan."""
     ship: Ship
     vehicles: tuple[Vehicle, ...]
 
@@ -74,7 +70,6 @@ class Problem:
 
 @dataclass
 class Placement:
-    """Keputusan penempatan untuk satu kendaraan (bagian yang berubah-ubah)."""
     placed: bool = False
     x: int = 0
     y: int = 0
@@ -83,14 +78,10 @@ class Placement:
 
 @dataclass
 class State:
-    """
-    Satu solusi (state). placements[i] adalah penempatan untuk
-    problem.vehicles[i], sehingga urutannya harus selalu sama.
-    """
+    # placements[i] milik problem.vehicles[i], urutannya harus sama
     placements: list[Placement]
 
     def copy(self) -> State:
-        """Deep copy. Selalu gunakan ini sebelum mengubah state."""
         return State([replace(p) for p in self.placements])
 
     def placed_indices(self) -> list[int]:

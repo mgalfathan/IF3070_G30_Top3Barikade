@@ -3,21 +3,20 @@ import numpy as np
 from .model import Placement, Problem, State, Vehicle
 
 EMPTY = -1
-CONFLICT = -2  
+CONFLICT = -2
 
 def footprint(vehicle: Vehicle, p: Placement) -> tuple[int, int]:
-    """Ukuran (dx, dy) kendaraan sesuai orientasi pada placement."""
     return vehicle.dims(p.orientation)
 
 
 def occupied_cells(vehicle: Vehicle, p: Placement) -> list[tuple[int, int]]:
-    """Daftar sel (x, y) yang ditempati kendaraan (termasuk yang di luar geladak)."""
+    # termasuk sel yang berada di luar geladak
     dx, dy = footprint(vehicle, p)
     return [(x, y) for y in range(p.y, p.y + dy) for x in range(p.x, p.x + dx)]
 
 
 def _clipped_box(problem: Problem, vehicle: Vehicle, p: Placement):
-    """Kotak (x0, y0, x1, y1) bagian kendaraan di dalam geladak + jumlah sel di luar."""
+    # bagian kendaraan yang ada di dalam geladak + jumlah sel yang keluar batas
     ship = problem.ship
     dx, dy = footprint(vehicle, p)
     x0, y0 = max(p.x, 0), max(p.y, 0)
@@ -27,10 +26,7 @@ def _clipped_box(problem: Problem, vehicle: Vehicle, p: Placement):
 
 
 def build_grid(problem: Problem, state: State) -> tuple[np.ndarray, int]:
-    """
-    Grid hitungan berukuran (length, width); grid[y, x] = banyak kendaraan
-    yang menempati sel (x, y). Juga mengembalikan jumlah sel di luar geladak.
-    """
+    # grid[y, x] = jumlah kendaraan yang menempati sel (x, y)
     ship = problem.ship
     grid = np.zeros((ship.length, ship.width), dtype=np.int32)
     out_of_bounds = 0
@@ -45,10 +41,7 @@ def build_grid(problem: Problem, state: State) -> tuple[np.ndarray, int]:
 
 
 def id_grid(problem: Problem, state: State) -> np.ndarray:
-    """
-    Grid untuk visualisasi: indeks kendaraan pada tiap sel,
-    EMPTY (-1) jika kosong, CONFLICT (-2) jika overlap.
-    """
+    # isi sel: indeks kendaraan, EMPTY jika kosong, CONFLICT jika overlap
     ship = problem.ship
     grid = np.full((ship.length, ship.width), EMPTY, dtype=np.int32)
     for i, (v, p) in enumerate(zip(problem.vehicles, state.placements)):
@@ -71,14 +64,13 @@ def total_weight(problem: Problem, state: State) -> float:
 
 
 def violations(problem: Problem, state: State) -> dict:
-    """Besar tiap pelanggaran constraint (0 semua berarti state valid)."""
     grid, out_of_bounds = build_grid(problem, state)
     overlap = int(np.sum(grid[grid > 1] - 1))
     overweight = max(0.0, total_weight(problem, state) - problem.ship.max_capacity)
     return {
         "overlap": overlap,
         "out_of_bounds": int(out_of_bounds),
-        "overweight": float(overweight),    
+        "overweight": float(overweight),
     }
 
 
@@ -91,7 +83,7 @@ def default_penalty(problem: Problem) -> float:
 
 
 def evaluate(problem: Problem, state: State, penalty: float | None = None) -> float:
-    """Fungsi objektif yang dimaksimalkan oleh semua algoritma."""
+    # valid: total fee; tidak valid: fee - penalty * (1 + total pelanggaran)
     fee = total_fee(problem, state)
     viol = violations(problem, state)
     total_violation = viol["overlap"] + viol["out_of_bounds"] + viol["overweight"]
@@ -102,7 +94,6 @@ def evaluate(problem: Problem, state: State, penalty: float | None = None) -> fl
 
 
 def summarize(problem: Problem, state: State) -> dict:
-    """Ringkasan lengkap state untuk laporan dan visualisasi."""
     grid, _ = build_grid(problem, state)
     viol = violations(problem, state)
     return {
