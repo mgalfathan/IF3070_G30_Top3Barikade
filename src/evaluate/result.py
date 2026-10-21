@@ -3,7 +3,7 @@ import time
 from dataclasses import dataclass, field
 from typing import Any
 
-from .model import State
+from ..core.model import State
 
 
 @dataclass
@@ -14,9 +14,9 @@ class Result:
     initial_value: float
     final_value: float
     history: dict[str, list[float]] = field(default_factory=dict)
-    duration: float = 0.0               # detik
-    params: dict[str, Any] = field(default_factory=dict) 
-    extra: dict[str, Any] = field(default_factory=dict) 
+    duration: float = 0.0  # detik
+    params: dict[str, Any] = field(default_factory=dict)
+    extra: dict[str, Any] = field(default_factory=dict)
 
     @property
     def iterations_run(self) -> int:
@@ -24,14 +24,6 @@ class Result:
 
 
 class Timer:
-    """
-    Pengukur durasi proses pencarian.
-
-        with Timer() as t:
-            ...  # proses pencarian
-        durasi = t.elapsed
-    """
-
     def __enter__(self) -> Timer:
         self._start = time.perf_counter()
         self.elapsed = 0.0

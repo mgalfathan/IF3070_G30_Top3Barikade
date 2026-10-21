@@ -1,0 +1,17 @@
+{
+  "ship": {"width": 8, "length": 10, "max_capacity": 30},
+  "vehicles": [
+    {"id": "A", "w": 2, "l": 4, "fee": 120, "weight": 4},
+    {"id": "B", "w": 2, "l": 5, "fee": 150, "weight": 5},
+    {"id": "C", "w": 3, "l": 3, "fee": 110, "weight": 4},
+    {"id": "D", "w": 1, "l": 2, "fee": 40,  "weight": 1},
+    {"id": "E", "w": 4, "l": 3, "fee": 90,  "weight": 3},
+    {"id": "F", "w": 2, "l": 6, "fee": 260, "weight": 9},
+    {"id": "G", "w": 2, "l": 2, "fee": 60,  "weight": 2},
+    {"id": "H", "w": 4, "l": 2, "fee": 100, "weight": 4},
+    {"id": "I", "w": 1, "l": 3, "fee": 45,  "weight": 2},
+    {"id": "J", "w": 2, "l": 6, "fee": 170, "weight": 7},
+    {"id": "K", "w": 3, "l": 4, "fee": 140, "weight": 6},
+    {"id": "L", "w": 1, "l": 1, "fee": 20,  "weight": 1}
+  ]
+}
