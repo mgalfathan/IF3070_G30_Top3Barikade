@@ -1,4 +1,4 @@
-# python -m src.run_sa data/sample.json --seed 42 --out output/sa
+# python -m src.run_sa --seed 42 --out output/sa
 from __future__ import annotations
 import argparse
 from pathlib import Path
