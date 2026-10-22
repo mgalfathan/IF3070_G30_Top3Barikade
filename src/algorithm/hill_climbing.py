@@ -1,6 +1,6 @@
 from __future__ import annotations
 import random
-from typing import Iterator
+
 from ..core.model import Problem, State
 from ..core.objective import evaluate
 from ..evaluate.init import random_state
@@ -9,16 +9,16 @@ from ..evaluate.result import Result, Timer
 
 
 #Fungsi bantuan untuk mengakses seluruh tetangga
-def all_neighbors(problem: Problem, state: State) -> Iterator[State]:
-    #tidak perlu dirotate karena jika diluar kapal tidak perlu dicek
+def all_neighbors(problem: Problem, state: State):
+    list_neighbor = []
     for i in state.placed_indices():
-        yield rotate(state, i)
+        list_neighbor.append(rotate(state, i))
     for i in range(problem.n):
         vehicle = problem.vehicles[i]
         placement = state.placements[i]
 
         if placement.placed :
-            yield move_out(state,i)
+            list_neighbor.append(move_out(state,i))
 
         if vehicle.fits(problem.ship, placement.orientation) != True:
             continue
@@ -30,7 +30,7 @@ def all_neighbors(problem: Problem, state: State) -> Iterator[State]:
                 if placement.placed and j == placement.x and k == placement.y:
                     continue
                 else: 
-                    yield move(state, i, j, k)
+                    list_neighbor.append(move(state, i, j, k))
 
     for l in range(problem.n):
         for m in range(l+1, problem.n):
@@ -40,7 +40,8 @@ def all_neighbors(problem: Problem, state: State) -> Iterator[State]:
             if placementl.placed == False and placementm.placed == False:
                 continue
 
-            yield swap(state, l, m)
+            list_neighbor.append(swap(state, l, m))
+    return list_neighbor
         
     
 def steepest_ascent(problem: Problem,
