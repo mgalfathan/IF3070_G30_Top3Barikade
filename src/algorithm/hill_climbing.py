@@ -48,14 +48,15 @@ def steepest_ascent(problem: Problem,
                     initial: State | None = None,
                     max_iter: int = 1000,
                     p_placed: float = 0.5,
-                    seed: int | None = None) -> Result:
+                    seed: int | None = None,
+                    objective: str = "fee") -> Result:
     rng = random.Random(seed)
 
     if initial is not None:
         current = initial.copy() 
     else:
         current = random_state(problem, rng, p_placed)
-    current_value = evaluate(problem, current)
+    current_value = evaluate(problem=problem, state=current, objective=objective)
     initial_state, initial_value = current.copy(), current_value
 
     history = {"value" : []}
@@ -66,7 +67,7 @@ def steepest_ascent(problem: Problem,
             best_neighbor = None
 
             for neighbor in all_neighbors(problem, current):
-                neighbor_value = evaluate(problem, neighbor)
+                neighbor_value = evaluate(problem=problem, state=neighbor, objective=objective)
                 if current_neighbor < neighbor_value:
                     current_neighbor = neighbor_value
                     best_neighbor = neighbor
@@ -86,7 +87,7 @@ def steepest_ascent(problem: Problem,
         final_value = current_value,
         history= history,
         duration = timer.elapsed,
-        params = {"max_iter": max_iter, "p_placed": p_placed, "seed" : seed}, 
+        params = {"max_iter": max_iter, "p_placed": p_placed, "seed" : seed, "objective" : objective}, 
         extra = {"iterations" : len(history["value"])}
     )
     

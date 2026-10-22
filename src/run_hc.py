@@ -11,6 +11,7 @@ import matplotlib.pyplot as plt
 from .algorithm.hill_climbing import steepest_ascent
 from .evaluate.io import load_problem, save_result
 from .evaluate.report import report
+from .core.objective import OBJECTIVES
 
 
 # Membuat tampilan grafik history Nilai Objective terhadap Iterasi
@@ -30,6 +31,7 @@ def plot_history (history:dict, out_dir: Path):
 def main() -> None:
     parser = argparse.ArgumentParser(description="Steepest Ascent Hill-Climbing")
     parser.add_argument("problem", help="path file JSON permasalahan")
+    parser.add_argument("--objective", choices=OBJECTIVES)
     parser.add_argument("--max-iter", type=int, default=1000)
     parser.add_argument("--p-placed", type=float, default=0.5)
     parser.add_argument("--seed", type=int, default=None)
@@ -37,13 +39,13 @@ def main() -> None:
     args = parser.parse_args()
 
     problem = load_problem(args.problem)
-    result = steepest_ascent(problem, max_iter=args.max_iter, p_placed=args.p_placed, seed=args.seed)
+    result = steepest_ascent(problem, max_iter=args.max_iter, p_placed=args.p_placed, seed=args.seed, objective=args.objective)
 
     out_dir = Path(args.out)
     out_dir.mkdir(parents=True, exist_ok=True)
 
-    print(report(problem, result.initial_state, "Initial State"))
-    print(report(problem, result.final_state, "Final State"))
+    print(report(problem, result.initial_state, "Initial State", objective=args.objective))
+    print(report(problem, result.final_state, "Final State", objective=args.objective))
     print(f"Iterasi: {result.extra['iterations']}")
     print(f"Durasi: {result.duration:.3f} s")
 
