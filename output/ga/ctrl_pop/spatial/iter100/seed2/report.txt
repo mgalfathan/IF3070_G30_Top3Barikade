@@ -1,0 +1,83 @@
+===== Initial state =====
+id  ukuran       fee   berat  status
+A   2x4          120       4  di luar
+B   2x5          150       5  di kapal (x=0, y=3, H)
+C   3x3          110       4  di luar
+D   1x2           40       1  di luar
+E   4x3           90       3  di luar
+F   2x6          260       9  di luar
+G   2x2           60       2  di kapal (x=6, y=6, H)
+H   4x2          100       4  di luar
+I   1x3           45       2  di luar
+J   2x6          170       7  di kapal (x=4, y=1, H)
+K   3x4          140       6  di luar
+L   1x1           20       1  di luar
+
+Geladak (8x10):
+. . . . . . . .
+. . . . J J . .
+. . . . J J . .
+B B . . J J . .
+B B . . J J . .
+B B . . J J . .
+B B . . J J G G
+B B . . . . G G
+. . . . . . . .
+. . . . . . . .
+
+Value          : 380
+Total fee      : 380
+Total berat    : 14 / 30
+Valid          : True {'overlap': 0, 'out_of_bounds': 0, 'overweight': 0.0}
+Kendaraan masuk: 3 / 12
+Utilisasi deck : 32.5%
+
+===== Final state =====
+id  ukuran       fee   berat  status
+A   2x4          120       4  di kapal (x=2, y=0, H)
+B   2x5          150       5  di kapal (x=0, y=0, H)
+C   3x3          110       4  di luar
+D   1x2           40       1  di kapal (x=3, y=7, V)
+E   4x3           90       3  di luar
+F   2x6          260       9  di kapal (x=5, y=0, H)
+G   2x2           60       2  di kapal (x=1, y=6, H)
+H   4x2          100       4  di luar
+I   1x3           45       2  di kapal (x=7, y=1, H)
+J   2x6          170       7  di kapal (x=2, y=8, V)
+K   3x4          140       6  di luar
+L   1x1           20       1  di luar
+
+Geladak (8x10):
+B B A A . F F .
+B B A A . F F I
+B B A A . F F I
+B B A A . F F I
+B B . . . F F .
+. . . . . F F .
+. G G . . . . .
+. G G D D . . .
+. . J J J J J J
+. . J J J J J J
+
+Value          : 845
+Total fee      : 845
+Total berat    : 30 / 30
+Valid          : True {'overlap': 0, 'out_of_bounds': 0, 'overweight': 0.0}
+Kendaraan masuk: 7 / 12
+Utilisasi deck : 63.7%
+
+===== Ringkasan eksperimen =====
+Objective awal       : 380
+Objective akhir      : 845
+Final state valid    : True
+Terbaik di generasi  : 83
+Jumlah populasi      : 50
+Banyak iterasi       : 100
+Crossover rate       : 0.8
+Mutation rate        : 0.2
+Jumlah elit          : 2
+Ukuran turnamen      : 3
+p_placed             : 0.5
+Jenis crossover      : spatial
+Seed                 : 2
+Durasi pencarian     : 0.262 s

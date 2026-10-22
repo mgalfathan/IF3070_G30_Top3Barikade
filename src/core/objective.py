@@ -4,6 +4,7 @@ from .model import Placement, Problem, State, Vehicle
 
 EMPTY = -1
 CONFLICT = -2
+OBJECTIVES = ("fee", "eta")
 
 def footprint(vehicle: Vehicle, p: Placement) -> tuple[int, int]:
     return vehicle.dims(p.orientation)
@@ -63,6 +64,33 @@ def total_weight(problem: Problem, state: State) -> float:
     return sum(v.weight for v, p in zip(problem.vehicles, state.placements) if p.placed)
 
 
+def eta_range(problem: Problem) -> tuple[int, int]:
+    # ETA terkecil dan terbesar dari seluruh kendaraan di problem
+    etas = [v.eta for v in problem.vehicles]
+    return min(etas), max(etas)
+
+
+def eta_weight(vehicle: Vehicle, eta_min: int, eta_max: int) -> float:
+    # Menghitung bobot urgensi tiap kendaraan, ETA kecil memberikan nilai lebih baik
+    return (eta_max - vehicle.eta + 1) / (eta_max - eta_min + 1)
+
+
+def total_eta_score(problem: Problem, state: State) -> float:
+    # total fee x bobot ETA kendaraan di kapal
+    eta_min, eta_max = eta_range(problem)
+    return sum(v.fee * eta_weight(v, eta_min, eta_max)
+               for v, p in zip(problem.vehicles, state.placements) if p.placed)
+
+
+def base_value(problem: Problem, state: State, objective: str = "fee") -> float:
+    # nilai dasar sebelum dikenakan penalti
+    if objective == "fee":
+        return total_fee(problem, state)
+    if objective == "eta":
+        return total_eta_score(problem, state)
+    raise ValueError(f"objective tidak dikenal: {objective!r} (pilihan: {OBJECTIVES})")
+
+
 def violations(problem: Problem, state: State) -> dict:
     grid, out_of_bounds = build_grid(problem, state)
     overlap = int(np.sum(grid[grid > 1] - 1))
@@ -82,23 +110,25 @@ def default_penalty(problem: Problem) -> float:
     return sum(v.fee for v in problem.vehicles) + 1.0
 
 
-def evaluate(problem: Problem, state: State, penalty: float | None = None) -> float:
+def evaluate(problem: Problem, state: State, penalty: float | None = None, objective: str = "fee") -> float:
     # valid: total fee; tidak valid: fee - penalty * (1 + total pelanggaran)
-    fee = total_fee(problem, state)
+    value = base_value(problem, state, objective)
     viol = violations(problem, state)
     total_violation = viol["overlap"] + viol["out_of_bounds"] + viol["overweight"]
     if total_violation == 0:
-        return fee
+        return value
     p = default_penalty(problem) if penalty is None else penalty
-    return fee - p * (1 + total_violation)
+    return value - p * (1 + total_violation)
 
 
-def summarize(problem: Problem, state: State) -> dict:
+def summarize(problem: Problem, state: State, objective: str = "fee") -> dict:
     grid, _ = build_grid(problem, state)
     viol = violations(problem, state)
     return {
-        "value": evaluate(problem, state),
+        "objective": objective,
+        "value": evaluate(problem, state, objective=objective),
         "total_fee": total_fee(problem, state),
+        "total_eta_score": total_eta_score(problem, state),
         "total_weight": total_weight(problem, state),
         "max_capacity": problem.ship.max_capacity,
         "valid": all(val == 0 for val in viol.values()),
