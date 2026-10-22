@@ -2,7 +2,7 @@ from __future__ import annotations
 import math
 import random
 from ..core.model import Problem, State
-from ..core.objective import evaluate
+from ..core.objective import OBJECTIVES, evaluate
 from ..evaluate.init import random_state
 from ..evaluate.moves import random_neighbor
 from ..evaluate.result import Result, Timer
@@ -18,15 +18,19 @@ def default_t0(problem: Problem) -> float:
 
 
 def is_local_optimum(problem: Problem, state: State, value: float,
-                     rng: random.Random, samples: int = 30) -> bool:
+                     rng: random.Random, samples: int = 30,
+                     objective: str = "fee") -> bool:
     for i in range(samples):
         neighbor = random_neighbor(problem, state, rng)
-        if evaluate(problem, neighbor) > value:
+        if evaluate(problem, neighbor, objective=objective) > value:
             return False
     return True
 
 def simulated_annealing(problem: Problem, t0: float | None = None,
-                        alpha: float = 0.995, seed: int | None = None) -> Result:
+                        alpha: float = 0.995, seed: int | None = None,
+                        objective: str = "fee") -> Result:
+    if objective not in OBJECTIVES:
+        raise ValueError(f"objective tidak dikenal: {objective!r} (pilihan: {OBJECTIVES})")
 
     rng = random.Random(seed)
     check_stuck_rng = random.Random(None if seed is None else seed + 1) # rng terpisah agar pengecekan stuck tidak mengubah jalannya pencarian
@@ -35,7 +39,7 @@ def simulated_annealing(problem: Problem, t0: float | None = None,
         t0 = default_t0(problem)
 
     current_state = random_state(problem, rng)
-    current_value = evaluate(problem, current_state)
+    current_value = evaluate(problem, current_state, objective=objective)
 
     initial_state = current_state.copy()
     initial_value = current_value
@@ -54,7 +58,7 @@ def simulated_annealing(problem: Problem, t0: float | None = None,
         for i in range(1, MAX_ITER + 1):
             # 1. bangkitkan neighbor dan hitung selisih nilai
             neighbor = random_neighbor(problem, current_state, rng)
-            neighbor_value = evaluate(problem, neighbor)
+            neighbor_value = evaluate(problem, neighbor, objective=objective)
             delta = neighbor_value - current_value
 
             # 2. lebih baik: pasti diterima, lebih buruk: diterima dengan peluang e^(delta/T)
@@ -77,7 +81,7 @@ def simulated_annealing(problem: Problem, t0: float | None = None,
             # 4. cek stuck di local optimum setiap check_every iterasi
             if i % CHECK_EVERY == 0:
                 checks += 1
-                if is_local_optimum(problem, current_state, current_value, check_stuck_rng, SAMPLES):
+                if is_local_optimum(problem, current_state, current_value, check_stuck_rng, SAMPLES, objective):
                     stuck_count += 1
 
             history["value"].append(current_value)
@@ -98,7 +102,7 @@ def simulated_annealing(problem: Problem, t0: float | None = None,
         history=history,
         duration=timer.elapsed,
         params={"t0": t0, "alpha": alpha, "t_min": T_MIN, "max_iter": MAX_ITER,
-                "check_every": CHECK_EVERY, "samples": SAMPLES, "seed": seed},
+                "check_every": CHECK_EVERY, "samples": SAMPLES, "objective": objective, "seed": seed},
         extra={
             "stuck_count": stuck_count,
             "stuck_checks": checks,

@@ -43,16 +43,18 @@ def main() -> None:
     parser.add_argument("--t0", type=float, default=None)
     parser.add_argument("--alpha", type=float, default=0.995)
     parser.add_argument("--seed", type=int, default=None)
+    parser.add_argument("--objective", choices=["fee", "eta"], default="fee")
     parser.add_argument("--out", default="output/sa")
     args = parser.parse_args()
 
     problem = load_problem(args.problem)
-    result = simulated_annealing(problem, t0=args.t0, alpha=args.alpha, seed=args.seed)
+    result = simulated_annealing(problem, t0=args.t0, alpha=args.alpha, seed=args.seed,
+                                 objective=args.objective)
 
     out_dir = Path(args.out)
     out_dir.mkdir(parents=True, exist_ok=True)
-    print(report(problem, result.initial_state, "Initial state"))
-    print(report(problem, result.final_state, "Final state"))
+    print(report(problem, result.initial_state, "Initial state", objective=args.objective))
+    print(report(problem, result.final_state, "Final state", objective=args.objective))
     print(f"Iterasi           : {result.iterations_run}")
     print(f"Durasi            : {result.duration:.3f} s")
     print(f"Frekuensi stuck   : {result.extra['stuck_count']} dari "
