@@ -137,6 +137,6 @@ Instance masalah berupa file JSON, contohnya `data/dataset.json`:
 
 | Nama | NIM | Kontribusi |
 |---|---|---|
-| Reza Nashwan Faizi | 18224008 | (isi) |
+| Reza Nashwan Faizi | 18224008 | Steepest Ascent Hill-Climbing (algoritma, membuat seluruh tetangga, program utama, eksperimen), penyusunan laporan |
 | Aldyto Rafif Abhinanya | 18224043 | (isi) |
 | Muhammad Ghiffary Alfathan |18224084 |Simulated Annealing (algoritma, deteksi stuck, program utama, eksperimen), dataset, penyusunan laporan|
