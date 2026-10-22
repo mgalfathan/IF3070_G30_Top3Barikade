@@ -1,0 +1,88 @@
+===== Initial state =====
+id  ukuran       fee   berat   eta  status
+A   2x4          120       4     3  di luar
+B   2x5          150       5     4  di luar
+C   3x3          110       4     2  di kapal (x=5, y=0, V)
+D   1x2           40       1     1  di kapal (x=1, y=9, V)
+E   4x3           90       3     5  di luar
+F   2x6          260       9     6  di kapal (x=2, y=6, V)
+G   2x2           60       2     2  di kapal (x=0, y=4, V)
+H   4x2          100       4     4  di luar
+I   1x3           45       2     1  di kapal (x=4, y=1, H)
+J   2x6          170       7     3  di luar
+K   3x4          140       6     5  di luar
+L   1x1           20       1     6  di kapal (x=0, y=0, H)
+
+Geladak (8x10):
+L . . . . C C C
+. . . . I C C C
+. . . . I C C C
+. . . . I . . .
+G G . . . . . .
+G G . . . . . .
+. . F F F F F F
+. . F F F F F F
+. . . . . . . .
+. D D . . . . .
+
+Value (eta)    : 273.33
+Total fee      : 535
+Skor ETA       : 273.33
+Total berat    : 19 / 30
+Valid          : True {'overlap': 0, 'out_of_bounds': 0, 'overweight': 0.0}
+Kendaraan masuk: 6 / 12
+Utilisasi deck : 38.8%
+
+===== Final state =====
+id  ukuran       fee   berat   eta  status
+A   2x4          120       4     3  di kapal (x=3, y=8, V)
+B   2x5          150       5     4  di luar
+C   3x3          110       4     2  di kapal (x=5, y=3, V)
+D   1x2           40       1     1  di kapal (x=6, y=6, H)
+E   4x3           90       3     5  di luar
+F   2x6          260       9     6  di luar
+G   2x2           60       2     2  di kapal (x=0, y=8, H)
+H   4x2          100       4     4  di kapal (x=0, y=3, V)
+I   1x3           45       2     1  di kapal (x=4, y=2, V)
+J   2x6          170       7     3  di kapal (x=2, y=2, H)
+K   3x4          140       6     5  di luar
+L   1x1           20       1     6  di kapal (x=1, y=7, V)
+
+Geladak (8x10):
+. . . . . . . .
+. . . . . . . .
+. . J J I I I .
+H H J J . C C C
+H H J J . C C C
+H H J J . C C C
+H H J J . . D .
+. L J J . . D .
+G G . A A A A .
+G G . A A A A .
+
+Value (eta)    : 473.33
+Total fee      : 665
+Skor ETA       : 473.33
+Total berat    : 25 / 30
+Valid          : True {'overlap': 0, 'out_of_bounds': 0, 'overweight': 0.0}
+Kendaraan masuk: 8 / 12
+Utilisasi deck : 58.8%
+
+===== Ringkasan eksperimen =====
+Objective function   : eta
+Objective awal       : 273.33
+Objective akhir      : 473.33
+Total fee akhir      : 665
+Skor ETA akhir       : 473.33
+Final state valid    : True
+Terbaik di generasi  : 48
+Jumlah populasi      : 100
+Banyak iterasi       : 100
+Crossover rate       : 0.8
+Mutation rate        : 0.2
+Jumlah elit          : 2
+Ukuran turnamen      : 3
+p_placed             : 0.5
+Jenis crossover      : uniform
+Seed                 : 1
+Durasi pencarian     : 0.657 s

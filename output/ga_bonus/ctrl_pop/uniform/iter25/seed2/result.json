@@ -1,0 +1,291 @@
+{
+  "algorithm": "genetic_algorithm",
+  "params": {
+    "population_size": 50,
+    "iterations": 25,
+    "crossover_rate": 0.8,
+    "mutation_rate": 0.2,
+    "elite_count": 2,
+    "tournament_size": 3,
+    "p_placed": 0.5,
+    "crossover_type": "uniform",
+    "objective": "eta",
+    "seed": 2
+  },
+  "duration": 0.06104330001107883,
+  "iterations_run": 25,
+  "initial_value": 238.33333333333331,
+  "final_value": 453.3333333333333,
+  "initial_state": {
+    "vehicles": [
+      {
+        "id": "A",
+        "placed": false,
+        "x": 0,
+        "y": 6,
+        "orientation": "V"
+      },
+      {
+        "id": "B",
+        "placed": true,
+        "x": 0,
+        "y": 3,
+        "orientation": "H"
+      },
+      {
+        "id": "C",
+        "placed": false,
+        "x": 5,
+        "y": 3,
+        "orientation": "H"
+      },
+      {
+        "id": "D",
+        "placed": false,
+        "x": 3,
+        "y": 3,
+        "orientation": "H"
+      },
+      {
+        "id": "E",
+        "placed": false,
+        "x": 3,
+        "y": 6,
+        "orientation": "V"
+      },
+      {
+        "id": "F",
+        "placed": false,
+        "x": 2,
+        "y": 3,
+        "orientation": "H"
+      },
+      {
+        "id": "G",
+        "placed": true,
+        "x": 6,
+        "y": 6,
+        "orientation": "H"
+      },
+      {
+        "id": "H",
+        "placed": false,
+        "x": 4,
+        "y": 6,
+        "orientation": "V"
+      },
+      {
+        "id": "I",
+        "placed": false,
+        "x": 4,
+        "y": 2,
+        "orientation": "H"
+      },
+      {
+        "id": "J",
+        "placed": true,
+        "x": 4,
+        "y": 1,
+        "orientation": "H"
+      },
+      {
+        "id": "K",
+        "placed": false,
+        "x": 4,
+        "y": 5,
+        "orientation": "H"
+      },
+      {
+        "id": "L",
+        "placed": false,
+        "x": 5,
+        "y": 9,
+        "orientation": "V"
+      }
+    ],
+    "summary": {
+      "objective": "fee",
+      "value": 380.0,
+      "total_fee": 380.0,
+      "total_eta_score": 238.33333333333331,
+      "total_weight": 14.0,
+      "max_capacity": 30.0,
+      "valid": true,
+      "violations": {
+        "overlap": 0,
+        "out_of_bounds": 0,
+        "overweight": 0.0
+      },
+      "placed_count": 3,
+      "vehicle_count": 12,
+      "deck_utilization": 0.325
+    }
+  },
+  "final_state": {
+    "vehicles": [
+      {
+        "id": "A",
+        "placed": true,
+        "x": 0,
+        "y": 0,
+        "orientation": "H"
+      },
+      {
+        "id": "B",
+        "placed": true,
+        "x": 4,
+        "y": 5,
+        "orientation": "H"
+      },
+      {
+        "id": "C",
+        "placed": true,
+        "x": 0,
+        "y": 5,
+        "orientation": "H"
+      },
+      {
+        "id": "D",
+        "placed": true,
+        "x": 4,
+        "y": 4,
+        "orientation": "V"
+      },
+      {
+        "id": "E",
+        "placed": false,
+        "x": 0,
+        "y": 0,
+        "orientation": "H"
+      },
+      {
+        "id": "F",
+        "placed": false,
+        "x": 1,
+        "y": 7,
+        "orientation": "V"
+      },
+      {
+        "id": "G",
+        "placed": true,
+        "x": 3,
+        "y": 0,
+        "orientation": "H"
+      },
+      {
+        "id": "H",
+        "placed": false,
+        "x": 4,
+        "y": 6,
+        "orientation": "V"
+      },
+      {
+        "id": "I",
+        "placed": false,
+        "x": 4,
+        "y": 2,
+        "orientation": "H"
+      },
+      {
+        "id": "J",
+        "placed": true,
+        "x": 6,
+        "y": 4,
+        "orientation": "H"
+      },
+      {
+        "id": "K",
+        "placed": false,
+        "x": 4,
+        "y": 5,
+        "orientation": "H"
+      },
+      {
+        "id": "L",
+        "placed": true,
+        "x": 5,
+        "y": 3,
+        "orientation": "H"
+      }
+    ],
+    "summary": {
+      "objective": "fee",
+      "value": 670.0,
+      "total_fee": 670.0,
+      "total_eta_score": 453.3333333333333,
+      "total_weight": 24.0,
+      "max_capacity": 30.0,
+      "valid": true,
+      "violations": {
+        "overlap": 0,
+        "out_of_bounds": 0,
+        "overweight": 0.0
+      },
+      "placed_count": 7,
+      "vehicle_count": 12,
+      "deck_utilization": 0.575
+    }
+  },
+  "history": {
+    "max": [
+      271.6666666666667,
+      290.0,
+      336.6666666666667,
+      400.0,
+      400.0,
+      400.0,
+      400.0,
+      400.0,
+      410.0,
+      410.0,
+      410.0,
+      450.0,
+      450.0,
+      450.0,
+      450.0,
+      450.0,
+      450.0,
+      450.0,
+      450.0,
+      450.0,
+      450.0,
+      450.0,
+      453.3333333333333,
+      453.3333333333333,
+      453.3333333333333
+    ],
+    "avg": [
+      -10313.853333333334,
+      -4877.42,
+      -2839.84,
+      -2320.8933333333334,
+      -1485.32,
+      -811.74,
+      -1676.7533333333333,
+      -2237.9266666666667,
+      -1326.8466666666666,
+      -1429.68,
+      -955.42,
+      -1717.9533333333334,
+      -195.9933333333333,
+      -700.4266666666667,
+      -105.05333333333333,
+      -646.54,
+      -777.9733333333332,
+      27.846666666666664,
+      -412.09333333333336,
+      -828.8133333333333,
+      -567.08,
+      -178.28,
+      -698.3466666666667,
+      -515.14,
+      -617.6533333333333
+    ]
+  },
+  "extra": {
+    "final_valid": true,
+    "best_generation": 23,
+    "final_total_fee": 670.0,
+    "final_eta_score": 453.3333333333333
+  }
+}
