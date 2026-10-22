@@ -15,7 +15,7 @@ from .algorithm.genetic_algorithm import genetic_algorithm
 from .core.model import Problem
 from .evaluate.io import load_problem, save_result
 from .evaluate.result import Result
-from .run_sa import report
+from .evaluate.report import report
 
 
 def plot_history(result: Result, out_dir: Path) -> Path:
