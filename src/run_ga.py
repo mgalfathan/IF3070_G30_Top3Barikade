@@ -1,3 +1,7 @@
+# Contoh run:
+#   py -m src.run_ga data/sample.json --pop 50 --iter 300 --seed 42
+#   py -m src.run_ga data/sample.json --pop 50 --iter 300 --seed 42 --crossover spatial --out output/ga_spatial
+
 from __future__ import annotations
 
 import argparse
@@ -11,7 +15,7 @@ from .algorithm.genetic_algorithm import genetic_algorithm
 from .core.model import Problem
 from .evaluate.io import load_problem, save_result
 from .evaluate.result import Result
-from .run_sa import report
+from .evaluate.report import report
 
 
 def plot_history(result: Result, out_dir: Path) -> Path:
@@ -35,7 +39,7 @@ def plot_history(result: Result, out_dir: Path) -> Path:
 
     fig.suptitle(f"Genetic Algorithm: objective terhadap iterasi\n"
                  f"populasi={p['population_size']}, iterasi={p['iterations']}, "
-                 f"seed={p['seed']}")
+                 f"crossover={p['crossover_type']}, seed={p['seed']}")
     fig.tight_layout()
 
     path = out_dir / "ga_objective.png"
@@ -59,6 +63,7 @@ def summary_text(result: Result) -> str:
             f"Jumlah elit          : {p['elite_count']}\n"
             f"Ukuran turnamen      : {p['tournament_size']}\n"
             f"p_placed             : {p['p_placed']}\n"
+            f"Jenis crossover      : {p['crossover_type']}\n"
             f"Seed                 : {p['seed']}\n"
             f"Durasi pencarian     : {result.duration:.3f} s\n")
 
@@ -66,7 +71,8 @@ def summary_text(result: Result) -> str:
 def run_once(problem: Problem, params: dict, out_dir: str | Path,
              verbose: bool = True) -> Result:
     """
-    Menjalankan satu kali GA.
+    Menjalankan satu kali GA lalu menyimpan report.txt, ga_objective.png,
+    dan result.json ke out_dir.
     """
     out_dir = Path(out_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
@@ -99,6 +105,8 @@ def main() -> None:
     parser.add_argument("--tournament", type=int, default=3, help="ukuran turnamen")
     parser.add_argument("--p-placed", type=float, default=0.5,
                         help="peluang kendaraan masuk kapal pada populasi awal")
+    parser.add_argument("--crossover", choices=["uniform", "spatial"], default="uniform",
+                        help="jenis crossover (default: uniform)")
     parser.add_argument("--seed", type=int, default=None)
     parser.add_argument("--out", default="output/ga")
     args = parser.parse_args()
@@ -112,6 +120,7 @@ def main() -> None:
         "elite_count": args.elite,
         "tournament_size": args.tournament,
         "p_placed": args.p_placed,
+        "crossover_type": args.crossover,
         "seed": args.seed,
     }
     run_once(problem, params, args.out)
