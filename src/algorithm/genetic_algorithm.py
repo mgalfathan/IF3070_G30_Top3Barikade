@@ -3,7 +3,8 @@ from __future__ import annotations
 import random
 
 from ..core.model import Problem, State
-from ..core.objective import evaluate, is_valid
+from ..core.objective import (OBJECTIVES, evaluate, is_valid,
+                              total_eta_score, total_fee) 
 from ..evaluate.init import random_state
 from ..evaluate.moves import random_neighbor
 from dataclasses import replace
@@ -25,14 +26,14 @@ def initialize_population(problem: Problem, size: int, rng: random.Random, p_pla
     return population
 
 
-def evaluate_population(problem: Problem, population: list[State]) -> list[float]:
+def evaluate_population(problem: Problem, population: list[State], objective: str = "fee") -> list[float]:
     """
     Menghitung fitness setiap individu.
     """
     fitnesses = []
 
     for i in range(len(population)):
-        fitnesses.append(evaluate(problem, population[i]))
+        fitnesses.append(evaluate(problem, population[i], objective=objective))
 
     return fitnesses
 
@@ -161,19 +162,22 @@ def genetic_algorithm(problem: Problem,
                       tournament_size: int = 3,
                       p_placed: float = 0.5,
                       crossover_type: str = "uniform",
+                      objective: str = "fee",
                       seed: int | None = None) -> Result:
     """
     Menjalankan Genetic Algorithm dan mengembalikan Result.
     """
     if crossover_type not in ("uniform", "spatial"):
         raise ValueError(f"crossover_type tidak dikenal: {crossover_type!r}")
+    if objective not in OBJECTIVES:                                                
+        raise ValueError(f"objective tidak dikenal: {objective!r} (pilihan: {OBJECTIVES})")
  
     rng = random.Random(seed)
     history: dict[str, list[float]] = {"max": [], "avg": []}
  
     with Timer() as timer:
         population = initialize_population(problem, population_size, rng, p_placed)
-        fitness = evaluate_population(problem, population)
+        fitness = evaluate_population(problem, population, objective)
         initial_state = select_elites(population, fitness, 1)[0]
         initial_value = max(fitness)
         state_bsf = initial_state.copy()
@@ -199,7 +203,7 @@ def genetic_algorithm(problem: Problem,
                 new_population.append(child)
 
             population = new_population
-            fitness = evaluate_population(problem, population)
+            fitness = evaluate_population(problem, population, objective)
  
             history["max"].append(max(fitness))
             history["avg"].append(sum(fitness) / len(fitness))
@@ -228,10 +232,13 @@ def genetic_algorithm(problem: Problem,
             "tournament_size": tournament_size,
             "p_placed": p_placed,
             "crossover_type": crossover_type,
+            "objective": objective,
             "seed": seed,
         },
         extra={
             "final_valid": final_valid,
             "best_generation": best_generation,
+            "final_total_fee": total_fee(problem, state_bsf),
+            "final_eta_score": total_eta_score(problem, state_bsf),
         },
     )
