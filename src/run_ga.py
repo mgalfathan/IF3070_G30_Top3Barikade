@@ -1,6 +1,6 @@
 # Contoh run:
-#   py -m src.run_ga data/sample.json --pop 50 --iter 300 --seed 42
-#   py -m src.run_ga data/sample.json --pop 50 --iter 300 --seed 42 --crossover spatial --out output/ga_spatial
+#   py -m src.run_ga  --pop 50 --iter 300 --seed 42
+#   py -m src.run_ga  --pop 50 --iter 300 --seed 42 --crossover spatial --out output/ga_spatial
 
 from __future__ import annotations
 
@@ -96,7 +96,7 @@ def run_once(problem: Problem, params: dict, out_dir: str | Path,
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Genetic Algorithm")
-    parser.add_argument("problem", help="path file JSON permasalahan")
+    parser.add_argument("problem", nargs="?", default="data/dataset.json")
     parser.add_argument("--pop", type=int, default=50, help="jumlah populasi")
     parser.add_argument("--iter", type=int, default=300, help="banyak iterasi (generasi)")
     parser.add_argument("--crossover-rate", type=float, default=0.8)

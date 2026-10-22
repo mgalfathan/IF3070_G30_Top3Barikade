@@ -1,4 +1,4 @@
-# python -m src.run_sa data/sample.json --seed 42 --out output/sa
+# python -m src.run_sa --seed 42 --out output/sa
 from __future__ import annotations
 import argparse
 from pathlib import Path
@@ -39,7 +39,7 @@ def plot_history(history: dict, out_dir: Path) -> None:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Simulated Annealing")
-    parser.add_argument("problem", nargs="?", default="data/sample.json")
+    parser.add_argument("problem", nargs="?", default="data/dataset.json")
     parser.add_argument("--t0", type=float, default=None)
     parser.add_argument("--alpha", type=float, default=0.995)
     parser.add_argument("--seed", type=int, default=None)
