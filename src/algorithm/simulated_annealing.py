@@ -58,19 +58,21 @@ def simulated_annealing(problem: Problem, t0: float | None = None,
             delta = neighbor_value - current_value
 
             # 2. lebih baik: pasti diterima, lebih buruk: diterima dengan peluang e^(delta/T)
-            prob = 1.0 if delta >= 0 else math.exp(delta / t)
+            prob = 1.0 if delta > 0 else math.exp(delta / t)
             accepted = rng.random() < prob
 
             if accepted:
                 if delta < 0:
                     accepted_worse += 1
-                current_state, current_value = neighbor, neighbor_value
+                current_state = neighbor
+                current_value = neighbor_value
             else:
                 rejected += 1
 
             # 3. simpan state terbaik
             if current_value > best_value:
-                best_state, best_value = current_state.copy(), current_value
+                best_state  = current_state.copy()
+                best_value = current_value
 
             # 4. cek stuck di local optimum setiap check_every iterasi
             if i % CHECK_EVERY == 0:
