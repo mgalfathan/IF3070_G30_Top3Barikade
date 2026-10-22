@@ -1,0 +1,284 @@
+{
+  "algorithm": "genetic_algorithm",
+  "params": {
+    "population_size": 50,
+    "iterations": 25,
+    "crossover_rate": 0.8,
+    "mutation_rate": 0.2,
+    "elite_count": 2,
+    "tournament_size": 3,
+    "p_placed": 0.5,
+    "crossover_type": "uniform",
+    "seed": 3
+  },
+  "duration": 0.0621677000017371,
+  "iterations_run": 25,
+  "initial_value": 470.0,
+  "final_value": 745.0,
+  "initial_state": {
+    "vehicles": [
+      {
+        "id": "A",
+        "placed": false,
+        "x": 1,
+        "y": 8,
+        "orientation": "V"
+      },
+      {
+        "id": "B",
+        "placed": true,
+        "x": 1,
+        "y": 2,
+        "orientation": "H"
+      },
+      {
+        "id": "C",
+        "placed": false,
+        "x": 0,
+        "y": 7,
+        "orientation": "V"
+      },
+      {
+        "id": "D",
+        "placed": false,
+        "x": 2,
+        "y": 8,
+        "orientation": "V"
+      },
+      {
+        "id": "E",
+        "placed": false,
+        "x": 5,
+        "y": 3,
+        "orientation": "V"
+      },
+      {
+        "id": "F",
+        "placed": true,
+        "x": 2,
+        "y": 7,
+        "orientation": "V"
+      },
+      {
+        "id": "G",
+        "placed": true,
+        "x": 5,
+        "y": 0,
+        "orientation": "H"
+      },
+      {
+        "id": "H",
+        "placed": false,
+        "x": 3,
+        "y": 2,
+        "orientation": "H"
+      },
+      {
+        "id": "I",
+        "placed": false,
+        "x": 1,
+        "y": 3,
+        "orientation": "V"
+      },
+      {
+        "id": "J",
+        "placed": false,
+        "x": 0,
+        "y": 4,
+        "orientation": "H"
+      },
+      {
+        "id": "K",
+        "placed": false,
+        "x": 0,
+        "y": 4,
+        "orientation": "V"
+      },
+      {
+        "id": "L",
+        "placed": false,
+        "x": 2,
+        "y": 7,
+        "orientation": "H"
+      }
+    ],
+    "summary": {
+      "value": 470.0,
+      "total_fee": 470.0,
+      "total_weight": 16.0,
+      "max_capacity": 30.0,
+      "valid": true,
+      "violations": {
+        "overlap": 0,
+        "out_of_bounds": 0,
+        "overweight": 0.0
+      },
+      "placed_count": 3,
+      "vehicle_count": 12,
+      "deck_utilization": 0.325
+    }
+  },
+  "final_state": {
+    "vehicles": [
+      {
+        "id": "A",
+        "placed": false,
+        "x": 1,
+        "y": 8,
+        "orientation": "V"
+      },
+      {
+        "id": "B",
+        "placed": true,
+        "x": 1,
+        "y": 2,
+        "orientation": "H"
+      },
+      {
+        "id": "C",
+        "placed": false,
+        "x": 3,
+        "y": 7,
+        "orientation": "V"
+      },
+      {
+        "id": "D",
+        "placed": false,
+        "x": 2,
+        "y": 8,
+        "orientation": "V"
+      },
+      {
+        "id": "E",
+        "placed": false,
+        "x": 5,
+        "y": 3,
+        "orientation": "V"
+      },
+      {
+        "id": "F",
+        "placed": true,
+        "x": 2,
+        "y": 7,
+        "orientation": "V"
+      },
+      {
+        "id": "G",
+        "placed": false,
+        "x": 6,
+        "y": 8,
+        "orientation": "H"
+      },
+      {
+        "id": "H",
+        "placed": true,
+        "x": 6,
+        "y": 1,
+        "orientation": "V"
+      },
+      {
+        "id": "I",
+        "placed": true,
+        "x": 0,
+        "y": 6,
+        "orientation": "H"
+      },
+      {
+        "id": "J",
+        "placed": true,
+        "x": 3,
+        "y": 0,
+        "orientation": "H"
+      },
+      {
+        "id": "K",
+        "placed": false,
+        "x": 0,
+        "y": 4,
+        "orientation": "V"
+      },
+      {
+        "id": "L",
+        "placed": true,
+        "x": 0,
+        "y": 9,
+        "orientation": "H"
+      }
+    ],
+    "summary": {
+      "value": 745.0,
+      "total_fee": 745.0,
+      "total_weight": 28.0,
+      "max_capacity": 30.0,
+      "valid": true,
+      "violations": {
+        "overlap": 0,
+        "out_of_bounds": 0,
+        "overweight": 0.0
+      },
+      "placed_count": 6,
+      "vehicle_count": 12,
+      "deck_utilization": 0.575
+    }
+  },
+  "history": {
+    "max": [
+      470.0,
+      640.0,
+      640.0,
+      640.0,
+      680.0,
+      680.0,
+      680.0,
+      680.0,
+      680.0,
+      680.0,
+      700.0,
+      700.0,
+      700.0,
+      700.0,
+      700.0,
+      700.0,
+      700.0,
+      700.0,
+      700.0,
+      700.0,
+      700.0,
+      700.0,
+      700.0,
+      745.0,
+      745.0
+    ],
+    "avg": [
+      -9187.72,
+      -5190.2,
+      -1429.38,
+      -1850.44,
+      -581.5,
+      -1280.7,
+      -727.92,
+      -763.58,
+      -239.4,
+      -1406.0,
+      -1008.6,
+      -1065.24,
+      -1532.7,
+      134.58,
+      424.1,
+      -457.58,
+      -582.08,
+      -373.52,
+      -339.6,
+      -510.02,
+      -371.02,
+      -109.72,
+      -658.24,
+      -419.66,
+      -818.96
+    ]
+  },
+  "extra": {
+    "final_valid": true,
+    "best_generation": 24
+  }
+}
