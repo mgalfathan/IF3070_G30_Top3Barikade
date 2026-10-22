@@ -111,7 +111,6 @@ def default_penalty(problem: Problem) -> float:
 
 
 def evaluate(problem: Problem, state: State, penalty: float | None = None, objective: str = "fee") -> float:
-    # valid: total fee; tidak valid: fee - penalty * (1 + total pelanggaran)
     value = base_value(problem, state, objective)
     viol = violations(problem, state)
     total_violation = viol["overlap"] + viol["out_of_bounds"] + viol["overweight"]
