@@ -1,6 +1,5 @@
 # Contoh run:
-#   py -m src.run_ga  --pop 50 --iter 300 --seed 42
-#   py -m src.run_ga  --pop 50 --iter 300 --seed 42 --crossover spatial --out output/ga_spatial
+#   py -m src.run_ga data/dataset.json --pop 50 --iter 300 --seed 42 --crossover spatial --objective eta --out output/ga/initial_run/spatial
 
 from __future__ import annotations
 
@@ -13,6 +12,7 @@ import matplotlib.pyplot as plt
 
 from .algorithm.genetic_algorithm import genetic_algorithm
 from .core.model import Problem
+from .core.objective import OBJECTIVES
 from .evaluate.io import load_problem, save_result
 from .evaluate.result import Result
 from .evaluate.report import report
@@ -39,6 +39,7 @@ def plot_history(result: Result, out_dir: Path) -> Path:
 
     fig.suptitle(f"Genetic Algorithm: objective terhadap iterasi\n"
                  f"populasi={p['population_size']}, iterasi={p['iterations']}, "
+                 f"crossover={p['crossover_type']}, objective={p['objective']}, "
                  f"crossover={p['crossover_type']}, seed={p['seed']}")
     fig.tight_layout()
 
@@ -52,8 +53,11 @@ def summary_text(result: Result) -> str:
     """Ringkasan eksperimen."""
     p = result.params
     return (f"===== Ringkasan eksperimen =====\n"
-            f"Objective awal       : {result.initial_value:g}\n"
-            f"Objective akhir      : {result.final_value:g}\n"
+            f"Objective function   : {p['objective']}\n"                       
+            f"Objective awal       : {result.initial_value:.2f}\n"  
+            f"Objective akhir      : {result.final_value:.2f}\n"
+            f"Total fee akhir      : {result.extra['final_total_fee']:g}\n"
+            f"Skor ETA akhir       : {result.extra['final_eta_score']:.2f}\n"
             f"Final state valid    : {result.extra['final_valid']}\n"
             f"Terbaik di generasi  : {result.extra['best_generation']}\n"
             f"Jumlah populasi      : {p['population_size']}\n"
@@ -78,9 +82,10 @@ def run_once(problem: Problem, params: dict, out_dir: str | Path,
     out_dir.mkdir(parents=True, exist_ok=True)
 
     result = genetic_algorithm(problem, **params)
+    objective = result.params["objective"]
 
-    text = (report(problem, result.initial_state, "Initial state") + "\n"
-            + report(problem, result.final_state, "Final state") + "\n"
+    text = (report(problem, result.initial_state, "Initial state", objective=objective) + "\n"
+            + report(problem, result.final_state, "Final state", objective=objective) + "\n"
             + summary_text(result))
     (out_dir / "report.txt").write_text(text, encoding="utf-8")
 
@@ -107,6 +112,8 @@ def main() -> None:
                         help="peluang kendaraan masuk kapal pada populasi awal")
     parser.add_argument("--crossover", choices=["uniform", "spatial"], default="uniform",
                         help="jenis crossover (default: uniform)")
+    parser.add_argument("--objective", choices=list(OBJECTIVES), default="fee",
+                        help="objective function: fee atau eta (default: fee)")
     parser.add_argument("--seed", type=int, default=None)
     parser.add_argument("--out", default="output/ga")
     args = parser.parse_args()
@@ -121,6 +128,7 @@ def main() -> None:
         "tournament_size": args.tournament,
         "p_placed": args.p_placed,
         "crossover_type": args.crossover,
+        "objective": args.objective,
         "seed": args.seed,
     }
     run_once(problem, params, args.out)
