@@ -7,9 +7,10 @@
     "max_iter": 20000,
     "check_every": 50,
     "samples": 30,
+    "objective": "fee",
     "seed": 1
   },
-  "duration": 0.20153489999938756,
+  "duration": 0.273614700010512,
   "iterations_run": 2314,
   "initial_value": -8592.0,
   "final_value": 840.0,
