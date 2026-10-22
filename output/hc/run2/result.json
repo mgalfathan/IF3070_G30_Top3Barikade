@@ -1,11 +1,11 @@
 {
   "algorithm": "steepest_ascent_hill_climbing",
   "params": {
-    "max_iter": 100,
+    "max_iter": 1000,
     "p_placed": 0.5,
     "seed": 2
   },
-  "duration": 0.17600540000057663,
+  "duration": 0.15600129999802448,
   "iterations_run": 3,
   "initial_value": -5815.0,
   "final_value": 845.0,

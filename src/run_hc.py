@@ -29,8 +29,8 @@ def plot_history (history:dict, out_dir: Path):
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Steepest Ascent Hill-Climbing")
-    parser.add_argument("problem", nargs="?", default="data/dataset.json")
-    parser.add_argument("--max-iter", type=int, default=100)
+    parser.add_argument("problem", help="path file JSON permasalahan")
+    parser.add_argument("--max-iter", type=int, default=1000)
     parser.add_argument("--p-placed", type=float, default=0.5)
     parser.add_argument("--seed", type=int, default=None)
     parser.add_argument("--out", default="output/hc")
