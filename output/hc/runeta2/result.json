@@ -3,113 +3,116 @@
   "params": {
     "max_iter": 1000,
     "p_placed": 0.5,
-    "seed": 1
+    "seed": 2,
+    "objective": "eta"
   },
-  "duration": 0.17344170000069425,
-  "iterations_run": 4,
-  "initial_value": -8592.0,
-  "final_value": 840.0,
+  "duration": 0.3451423000005889,
+  "iterations_run": 6,
+  "initial_value": -6195.0,
+  "final_value": 498.3333333333333,
   "initial_state": {
     "vehicles": [
       {
         "id": "A",
-        "placed": false,
-        "x": 4,
-        "y": 6,
-        "orientation": "H"
-      },
-      {
-        "id": "B",
         "placed": true,
-        "x": 2,
-        "y": 0,
-        "orientation": "H"
-      },
-      {
-        "id": "C",
-        "placed": false,
-        "x": 3,
-        "y": 6,
-        "orientation": "V"
-      },
-      {
-        "id": "D",
-        "placed": false,
-        "x": 7,
-        "y": 0,
-        "orientation": "H"
-      },
-      {
-        "id": "E",
-        "placed": false,
-        "x": 3,
-        "y": 4,
-        "orientation": "V"
-      },
-      {
-        "id": "F",
-        "placed": true,
-        "x": 5,
-        "y": 3,
-        "orientation": "H"
-      },
-      {
-        "id": "G",
-        "placed": false,
-        "x": 4,
-        "y": 1,
-        "orientation": "H"
-      },
-      {
-        "id": "H",
-        "placed": false,
         "x": 0,
         "y": 0,
         "orientation": "H"
       },
       {
-        "id": "I",
+        "id": "B",
         "placed": false,
-        "x": 6,
-        "y": 3,
+        "x": 5,
+        "y": 5,
         "orientation": "H"
       },
       {
-        "id": "J",
+        "id": "C",
         "placed": false,
-        "x": 4,
-        "y": 1,
-        "orientation": "H"
-      },
-      {
-        "id": "K",
-        "placed": true,
         "x": 4,
         "y": 3,
         "orientation": "V"
       },
       {
-        "id": "L",
+        "id": "D",
         "placed": false,
-        "x": 7,
-        "y": 4,
+        "x": 6,
+        "y": 6,
         "orientation": "H"
+      },
+      {
+        "id": "E",
+        "placed": false,
+        "x": 4,
+        "y": 3,
+        "orientation": "V"
+      },
+      {
+        "id": "F",
+        "placed": true,
+        "x": 6,
+        "y": 0,
+        "orientation": "H"
+      },
+      {
+        "id": "G",
+        "placed": false,
+        "x": 3,
+        "y": 6,
+        "orientation": "V"
+      },
+      {
+        "id": "H",
+        "placed": true,
+        "x": 4,
+        "y": 2,
+        "orientation": "H"
+      },
+      {
+        "id": "I",
+        "placed": true,
+        "x": 2,
+        "y": 5,
+        "orientation": "H"
+      },
+      {
+        "id": "J",
+        "placed": true,
+        "x": 2,
+        "y": 8,
+        "orientation": "V"
+      },
+      {
+        "id": "K",
+        "placed": false,
+        "x": 3,
+        "y": 5,
+        "orientation": "V"
+      },
+      {
+        "id": "L",
+        "placed": true,
+        "x": 5,
+        "y": 7,
+        "orientation": "V"
       }
     ],
     "summary": {
-      "value": -8592.0,
-      "total_fee": 550.0,
-      "total_weight": 20.0,
+      "objective": "fee",
+      "value": -5815.0,
+      "total_fee": 715.0,
+      "total_eta_score": 334.99999999999994,
+      "total_weight": 27.0,
       "max_capacity": 30.0,
       "valid": false,
       "violations": {
-        "overlap": 6,
+        "overlap": 4,
         "out_of_bounds": 0,
         "overweight": 0.0
       },
-      "placed_count": 3,
+      "placed_count": 6,
       "vehicle_count": 12,
-      "deck_utilization": 0.35
+      "deck_utilization": 0.5
     }
   },
   "final_state": {
@@ -117,92 +120,94 @@
       {
         "id": "A",
         "placed": true,
-        "x": 0,
-        "y": 6,
+        "x": 6,
+        "y": 0,
         "orientation": "H"
       },
       {
         "id": "B",
         "placed": true,
-        "x": 2,
-        "y": 0,
+        "x": 4,
+        "y": 2,
         "orientation": "H"
       },
       {
         "id": "C",
         "placed": true,
-        "x": 2,
-        "y": 6,
-        "orientation": "V"
+        "x": 0,
+        "y": 0,
+        "orientation": "H"
       },
       {
         "id": "D",
-        "placed": false,
-        "x": 7,
-        "y": 0,
-        "orientation": "H"
+        "placed": true,
+        "x": 5,
+        "y": 7,
+        "orientation": "V"
       },
       {
         "id": "E",
         "placed": false,
-        "x": 3,
-        "y": 4,
+        "x": 4,
+        "y": 3,
         "orientation": "V"
       },
       {
         "id": "F",
-        "placed": true,
-        "x": 0,
-        "y": 0,
-        "orientation": "H"
-      },
-      {
-        "id": "G",
-        "placed": true,
-        "x": 4,
-        "y": 0,
-        "orientation": "H"
-      },
-      {
-        "id": "H",
         "placed": false,
-        "x": 0,
-        "y": 0,
-        "orientation": "H"
-      },
-      {
-        "id": "I",
-        "placed": false,
-        "x": 6,
-        "y": 3,
-        "orientation": "H"
-      },
-      {
-        "id": "J",
-        "placed": false,
-        "x": 4,
-        "y": 1,
-        "orientation": "H"
-      },
-      {
-        "id": "K",
-        "placed": true,
         "x": 4,
         "y": 3,
         "orientation": "V"
       },
       {
-        "id": "L",
-        "placed": false,
-        "x": 7,
+        "id": "G",
+        "placed": true,
+        "x": 0,
         "y": 4,
+        "orientation": "V"
+      },
+      {
+        "id": "H",
+        "placed": false,
+        "x": 5,
+        "y": 5,
+        "orientation": "H"
+      },
+      {
+        "id": "I",
+        "placed": true,
+        "x": 2,
+        "y": 5,
+        "orientation": "H"
+      },
+      {
+        "id": "J",
+        "placed": true,
+        "x": 2,
+        "y": 8,
+        "orientation": "V"
+      },
+      {
+        "id": "K",
+        "placed": false,
+        "x": 3,
+        "y": 5,
+        "orientation": "V"
+      },
+      {
+        "id": "L",
+        "placed": true,
+        "x": 0,
+        "y": 3,
         "orientation": "H"
       }
     ],
     "summary": {
-      "value": 840.0,
-      "total_fee": 840.0,
-      "total_weight": 30.0,
+      "objective": "fee",
+      "value": 715.0,
+      "total_fee": 715.0,
+      "total_eta_score": 498.3333333333333,
+      "total_weight": 26.0,
       "max_capacity": 30.0,
       "valid": true,
       "violations": {
@@ -210,20 +215,22 @@
         "out_of_bounds": 0,
         "overweight": 0.0
       },
-      "placed_count": 6,
+      "placed_count": 8,
       "vehicle_count": 12,
-      "deck_utilization": 0.6875
+      "deck_utilization": 0.6125
     }
   },
   "history": {
     "value": [
-      550.0,
-      670.0,
-      780.0,
-      840.0
+      359.99999999999994,
+      409.99999999999994,
+      446.66666666666663,
+      458.3333333333333,
+      495.0,
+      498.3333333333333
     ]
   },
   "extra": {
-    "iterations": 4
+    "iterations": 6
   }
 }
