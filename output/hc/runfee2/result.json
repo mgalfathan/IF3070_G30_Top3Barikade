@@ -1,11 +1,12 @@
 {
   "algorithm": "steepest_ascent_hill_climbing",
   "params": {
-    "max_iter": 100,
+    "max_iter": 1000,
     "p_placed": 0.5,
-    "seed": 2
+    "seed": 2,
+    "objective": "fee"
   },
-  "duration": 0.17810729998745956,
+  "duration": 0.16165819999878295,
   "iterations_run": 3,
   "initial_value": -5815.0,
   "final_value": 845.0,
@@ -97,8 +98,10 @@
       }
     ],
     "summary": {
+      "objective": "fee",
       "value": -5815.0,
       "total_fee": 715.0,
+      "total_eta_score": 334.99999999999994,
       "total_weight": 27.0,
       "max_capacity": 30.0,
       "valid": false,
@@ -200,8 +203,10 @@
       }
     ],
     "summary": {
+      "objective": "fee",
       "value": 845.0,
       "total_fee": 845.0,
+      "total_eta_score": 446.66666666666663,
       "total_weight": 30.0,
       "max_capacity": 30.0,
       "valid": true,
