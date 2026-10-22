@@ -77,20 +77,15 @@ def plot_history(history: dict, out_dir: Path) -> None:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Simulated Annealing")
-    parser.add_argument("problem", help="path file JSON permasalahan")
+    parser.add_argument("problem", nargs="?", default="data/sample.json")
     parser.add_argument("--t0", type=float, default=None)
     parser.add_argument("--alpha", type=float, default=0.995)
-    parser.add_argument("--t-min", type=float, default=1e-3)
-    parser.add_argument("--max-iter", type=int, default=20_000)
-    parser.add_argument("--stuck-patience", type=int, default=100)
     parser.add_argument("--seed", type=int, default=None)
     parser.add_argument("--out", default="output/sa")
     args = parser.parse_args()
 
     problem = load_problem(args.problem)
-    result = simulated_annealing(problem, t0=args.t0, alpha=args.alpha, t_min=args.t_min,
-                                 max_iter=args.max_iter, stuck_patience=args.stuck_patience,
-                                 seed=args.seed)
+    result = simulated_annealing(problem, t0=args.t0, alpha=args.alpha, seed=args.seed)
 
     out_dir = Path(args.out)
     out_dir.mkdir(parents=True, exist_ok=True)
@@ -98,9 +93,9 @@ def main() -> None:
     print(report(problem, result.final_state, "Final state"))
     print(f"Iterasi           : {result.iterations_run}")
     print(f"Durasi            : {result.duration:.3f} s")
-    print(f"Frekuensi stuck   : {result.extra['stuck_count']} kali "
-          f"({result.extra['stuck_iterations']} iterasi tanpa perubahan "
-          f">= {args.stuck_patience} iterasi)")
+    print(f"Frekuensi stuck   : {result.extra['stuck_count']} dari "
+          f"{result.extra['stuck_checks']} pengecekan "
+          f"({result.extra['stuck_rate']:.1%})")
     print(f"Terima lebih buruk: {result.extra['accepted_worse']}")
     print(f"Ditolak           : {result.extra['rejected']}")
 
